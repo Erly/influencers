@@ -7,6 +7,7 @@ import com.dp.influencers.core.use
 import java.sql.Connection
 import java.sql.ResultSet
 import java.sql.SQLException
+import java.time.Instant
 import java.util.ArrayList
 
 class OfferDataAccess : MariaDbDataAccess(), IOfferDataAccess {
@@ -62,10 +63,23 @@ class OfferDataAccess : MariaDbDataAccess(), IOfferDataAccess {
             cnx = getConnection(false)
             cnx.autoCommit = false
 
-            val stat = cnx.prepareCall("{call Offer_Set (?, ?, ?, ?, ?, ?)}")
+            val stat = cnx.prepareCall("{call Offer_Set (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")
             stat.setLong(1, offer.brandId)
-            stat.setBoolean(5, offer.disabled)
-            stat.setLong(6, offer.creationDate)
+            stat.setLong(2, offer.categoryId)
+            stat.setLong(3, offer.offerType.id)
+            stat.setString(4, offer.name)
+            stat.setString(5, offer.description)
+            stat.setString(6, offer.claim)
+            stat.setString(7, offer.terms)
+            stat.setString(8, offer.image)
+            stat.setString(9, offer.codeSnippet)
+            stat.setLong(10, offer.startDate)
+            stat.setLong(11, offer.endDate)
+            stat.setString(12, offer.metaTitle)
+            stat.setString(13, offer.metaDescription)
+            stat.setString(14, offer.metaKeywords)
+            stat.setBoolean(15, offer.disabled)
+            stat.setLong(16, offer.creationDate)
 
             stat.execute()
             offerSetStatus = stat.getInt(5) > EXECUTED_WITHOUT_CHANGES
