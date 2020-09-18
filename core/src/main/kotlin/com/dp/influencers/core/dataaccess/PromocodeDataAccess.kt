@@ -26,7 +26,8 @@ class PromocodeDataAccess : MariaDbDataAccess(), IPromocodeDataAccess {
         val promocodeList = ArrayList<Promocode>()
 
         getConnection().use { cnx ->
-            cnx.prepareCall("{call Promocode_Get ()}").use { stat ->
+            cnx.prepareCall("{call Promocode_Get (?)}").use { stat ->
+                stat.setString(1, guid)
                 val res = stat.executeQuery()
                 while (res.next()) {
                     promocodeList.add(getPromocodeFromResultSet(res))

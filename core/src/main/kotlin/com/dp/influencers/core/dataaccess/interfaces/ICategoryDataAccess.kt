@@ -7,7 +7,7 @@ import java.sql.SQLException
 interface ICategoryDataAccess {
 
     @Throws(SQLException::class)
-    fun getCategories() : List<Category>
+    fun getCategories(isMenu : Boolean) : List<Category>
 
     @Throws(SQLException::class)
     fun setCategory(category: Category): Boolean

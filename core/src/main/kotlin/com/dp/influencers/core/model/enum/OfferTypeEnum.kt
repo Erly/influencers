@@ -1,7 +1,10 @@
 package com.dp.influencers.core.model.enum
 
 enum class OfferTypeEnum (val value: String){
-    CODE ("code"),
-    UNIQUE ("unique"),
-    LINK ("link")
+    DISCOUNT_CODE ("discount code"),
+    UNIQUE_CODE ("unique code"),
+    DISCOUNT ("discount"),
+    DEAL ("deal"),
+    SALE ("sale"),
+    REWARD ("reward")
 }
